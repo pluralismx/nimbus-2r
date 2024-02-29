@@ -1,0 +1,20 @@
+.notes-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+    background-color: var(--basic);
+}
+
+.new-note-container {
+    
+    padding: 1rem;
+}
+
+.saved-notes-container {
+    padding: 1rem;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll; */
+    overflow-y: scroll;
+}

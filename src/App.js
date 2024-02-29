@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes, Route} from 'react-router-dom';
+import NavigationbarComponent from './components/Navigationbar/NavigationbarComponent';
+import NotesComponent from './components/Notes/NotesComponent';
+import LeadTableComponent from './components/Lead-table/LeadTableComponent';
+import EmailCampaignComponent from './components/Email-campaign/EmailCampaignComponent';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="layout">
+      <NavigationbarComponent/>
+      <Routes>
+        <Route path="/notes" element={<NotesComponent/>}/>
+        <Route path="/lead-table" element={<LeadTableComponent/>}/>
+        <Route path="/email-campaign" element={<EmailCampaignComponent/>}/>
+      </Routes>
     </div>
   );
 }

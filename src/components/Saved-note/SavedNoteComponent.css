@@ -1,0 +1,49 @@
+
+.saved-note-card {
+    width: 100%;
+    background-color: var(--shadows);
+    height: 100%;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 14% 72% 14%;
+    box-shadow: 2px 2px 3px var(--shadows);
+    margin-bottom: 2.5rem;
+}
+
+.saved-note-header {
+    border-bottom: 1px solid var(--primary);
+    padding: 2px;
+}
+
+.saved-note-header input {
+
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.saved-note-body {
+    border-bottom: 1px solid var(--primary);
+}
+
+.saved-note-body textarea {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+    font-family: 'Regular';
+    font-size: medium;
+    padding: .5rem;
+}
+
+.saved-note-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: .5rem;
+}

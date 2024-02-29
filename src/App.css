@@ -1,38 +1,55 @@
-.App {
-  text-align: center;
+:root{
+  --basic: #d0efff;
+  --primary: #038399;
+  --accent: #feb9c5;
+  --warn: #b86b85;
+  --shadows: #021e20;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face{
+  src: url('assets/fonts/Ubuntu-Regular.ttf');
+  font-family: regular;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  font-family: 'Regular';
+}
+
+select {
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.btn-primary {
+  padding: 0 1rem;
+  background-color: var(--primary);
+  color: var(--basic);
+  font-family: 'Regular';
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 1px 1px 3px var(--shadows);
+}
+
+.btn-warn {
+  padding: 0 1rem;
+  background-color: var(--warn);
+  color: var(--basic);
+  font-family: 'Regular';
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 1px 1px 3px var(--shadows);
+}
+
+@media only screen and (max-width: 768px) {
+
+  .layout {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: 14vh 86vh;
   }
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
