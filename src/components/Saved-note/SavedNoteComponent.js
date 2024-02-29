@@ -3,13 +3,14 @@ import './SavedNoteComponent.css'
 
 class SavedNoteComponent extends Component {
     render(){
+        const {note} = this.props;
         return(
             <div className="saved-note-card">
                 <div className="saved-note-header">
-                    <input placeholder='Titulo'></input>
+                    <input placeholder={note.title}/>
                 </div>
                 <div className="saved-note-body">
-                    <textarea placeholder='contenido'>
+                    <textarea placeholder={note.content}>
 
                     </textarea>
                 </div>

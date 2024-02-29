@@ -12,9 +12,5 @@
 
 .saved-notes-container {
     padding: 1rem;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: scroll; */
     overflow-y: scroll;
 }
