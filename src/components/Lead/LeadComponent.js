@@ -3,25 +3,37 @@ import './LeadComponent.css';
 
 class LeadComponent extends Component {
 
+    state = {
+        lead: this.props.lead
+    }
+
+    editLead = () => {
+        console.log('working');
+
+        const lead = this.state.lead;
+        this.props.editLead(lead);
+    }
+
     render(){
+        const { id_user, id_website, id_lead, name, phone, email, content, status } = this.state.lead;
         return(            
             <div className="lead-container">
                 <div className="lead-header">
-                    <h3>Juana de la Torre Placencia</h3>
+                    <h3>{name}</h3>
                 </div>
                 <div className="lead-body">
                     <div className="lead-info">
                         <div>
                             <span className="data-label">Telefono: </span>
                             <br/>
-                            <span>+526642522024</span>
+                            <span>{phone}</span>
                         </div>
                         <div>
                             <span className="data-label">Correo: </span>
                             <br/>
-                            <span>juanadelatorre@hotmail.com</span>
+                            <span>{email}</span>
                         </div>
-                        <div class="div-info">
+                        <div className="div-info">
                             <span className="data-label">Status: </span>
                             <select>
                                 <option>Activo</option>
@@ -34,7 +46,7 @@ class LeadComponent extends Component {
                     <div className="lead-actions">
                         <button className="btn-warn">Llamar</button>
                         <button className="btn-primary">Notas</button>
-                        <button className="btn-primary">Editar</button>
+                        <button className="btn-primary" onClick={this.editLead}>Editar</button>
                         <button className="btn-primary">Eliminar</button>
                     </div>
                 </div>

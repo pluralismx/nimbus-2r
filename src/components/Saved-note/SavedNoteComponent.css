@@ -25,6 +25,7 @@
     background-color: transparent;
     font-size: 1.5rem;
     text-align: center;
+    color: var(--basic);
 }
 
 .saved-note-body {
@@ -40,6 +41,7 @@
     font-family: 'Regular';
     font-size: medium;
     padding: .5rem;
+    color: var(--basic);
 }
 
 .saved-note-footer {

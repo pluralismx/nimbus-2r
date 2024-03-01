@@ -1,37 +1,66 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import LeadComponent from '../Lead/LeadComponent';
 import LeadNotesModal from '../Lead-notes-modal/LeadNotesModal';
 import './LeadTableComponent.css';
 
 class LeadTableComponent extends Component {
 
-    contador = 0;
-
-    constructor(props){
-        super(props);
-        this.state = {
-            modalIsActive: false
-        }
+    state = {
+        leads: [],
+        editLead: null,
+        editLeadToggle: false
     }
 
-    showModal(){
+    getLeads = () => {
+        let id_website = 4;
+        let formData = new FormData();
+        formData.append("id_website", id_website);
+        axios.post("http://localhost/api-nimbus-2/lead/getLeads", formData)
+            .then(res => {
+                if (res.data.status === 'succes') {
+                    this.setState({
+                        leads: res.data.leads
+                    })
+                    console.log('leads cargados correctamente');
+
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+    }
+
+    handleEditLead = (lead) => {
+        console.log('Data received from child component:', lead);
         this.setState({
-            modalIsActive: (this.state.modalIsActive = true)
+            editLead: lead,
+            editLeadToggle: true
         });
     }
-    hideModal(){
+
+    handleToggleModal = () => {
         this.setState({
-            modalIsActive: (this.state.modalIsActive =  false)
+            editLeadToggle: false
         });
     }
 
+    componentDidMount() {
+        this.getLeads();
+    }
 
-    render(){
-        return(
+    render() {
+        const { leads, editLead, editLeadToggle } = this.state;
+        return (
             <div className="lead-table-container">
-                <LeadComponent/>
-                {/* <LeadNotesModal/> */}
-            </div>   
+                {leads.length > 0 ? (
+                    leads.map((lead, index) => (
+                        <LeadComponent key={index} lead={lead} editLead={this.handleEditLead} />
+                    ))
+                ) : (
+                    <div>There are currently no leads</div>
+                )}
+                {editLeadToggle && <LeadNotesModal data={editLead} toggleModal={this.handleToggleModal} updateLeads={this.getLeads} />}
+            </div>
         );
     }
 

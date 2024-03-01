@@ -15,7 +15,7 @@ class NotesComponent extends Component {
     getNotes = () => {
         let formData = new FormData();
         formData.append('id_website', 4);
-        axios.post("http://localhost/api-nimbus-2/note/getNotes", formData, { withCredentials:true })
+        axios.post("http://localhost/api-nimbus-2/note/getNotes", formData, { withCredentials: true })
             .then(res => {
                 this.setState({
                     notes: res.data,
@@ -28,21 +28,25 @@ class NotesComponent extends Component {
             })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getNotes();
     }
 
     render() {
-        const { notes } = this.state; // Assuming notes is an array in your component state
+        const { notes } = this.state;
         return (
             <div className='notes-container'>
                 <div className="new-note-container">
-                    <NewNoteComponent />
+                    <NewNoteComponent updateNotes={this.getNotes} />
                 </div>
                 <div className='saved-notes-container'>
-                    {notes.map((note, index) => (
-                    <SavedNoteComponent key={index} note={note} />
-                    ))}
+                    {notes.length > 0 ? (
+                        notes.map((note, index) => (
+                            <SavedNoteComponent key={index} note={note} updateNotes={this.getNotes} />
+                        ))
+                    ) : (
+                        <div>No notes found. Create a new note!</div>
+                    )}
                 </div>
             </div>
         );
