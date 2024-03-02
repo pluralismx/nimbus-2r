@@ -9,7 +9,8 @@ class NotesComponent extends Component {
 
     state = {
         notes: [],
-        status: null
+        status: null,
+        newNoteToggle: false
     }
 
     getNotes = () => {
@@ -32,14 +33,22 @@ class NotesComponent extends Component {
         this.getNotes();
     }
 
+    newNoteToggle = () => {
+        this.setState(prevState => ({
+            newNoteToggle: !prevState.newNoteToggle
+        }));
+    }
+
     render() {
-        const { notes } = this.state;
+        const { notes, newNoteToggle } = this.state;
         return (
             <div className='notes-container'>
-                <div className="new-note-container">
-                    <NewNoteComponent updateNotes={this.getNotes} />
+                <div className="notes-container-header">
+                    <h1>Notes</h1>
+                    <button className="btn-warn" onClick={this.newNoteToggle}>add</button>
                 </div>
-                <div className='saved-notes-container'>
+                <div className="notes-container-body">
+                    {newNoteToggle && <NewNoteComponent updateNotes={this.getNotes} />}
                     {notes.length > 0 ? (
                         notes.map((note, index) => (
                             <SavedNoteComponent key={index} note={note} updateNotes={this.getNotes} />

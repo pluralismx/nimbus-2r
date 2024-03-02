@@ -29,7 +29,6 @@ class LeadNotesModal extends Component {
 
         axios.post("http://localhost/api-nimbus-2/lead/updateLead", formData)
             .then(res => {
-                console.log(res.data);
                 if(res.data.status === 'succes'){
                     this.props.updateLeads();
                     this.props.toggleModal();

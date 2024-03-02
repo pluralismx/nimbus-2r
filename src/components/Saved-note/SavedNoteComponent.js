@@ -8,6 +8,16 @@ class SavedNoteComponent extends Component {
         note: this.props.note
     }
 
+    componentDidUpdate(prevProps) {
+        // Check if the note prop has changed
+        if (prevProps.note !== this.props.note) {
+            // Update the note state
+            this.setState({
+                note: this.props.note
+            });
+        }
+    }
+
     handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState(prevState => ({

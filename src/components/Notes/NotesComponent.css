@@ -1,16 +1,23 @@
 .notes-container {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 50% 50%;
     background-color: var(--basic);
-}
-
-.new-note-container {
-    
-    padding: 1rem;
-}
-
-.saved-notes-container {
-    padding: 1rem;
+    grid-row: 2/3;
+    grid-column: 1/2;
     overflow-y: scroll;
+}
+
+.notes-container-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notes-container-header h1{
+    margin:0;
+
+}
+
+.notes-container-body {
+    padding: 1rem;
+    height: 100%;
 }

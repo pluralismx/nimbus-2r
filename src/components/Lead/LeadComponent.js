@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios';
 import './LeadComponent.css';
 
 class LeadComponent extends Component {
@@ -7,15 +8,37 @@ class LeadComponent extends Component {
         lead: this.props.lead
     }
 
-    editLead = () => {
-        console.log('working');
+    componentDidUpdate(prevProps) {
+        if(prevProps.lead !== this.props.lead){
+            this.setState({
+                lead: this.props.lead
+            });
+        }
+    }
 
+    editLead = () => {
         const lead = this.state.lead;
         this.props.editLead(lead);
     }
 
+    deleteLead = () => {
+        const { id_lead } = this.state.lead;
+        let formData = new FormData();
+        formData.append('id_lead', id_lead);
+        axios.post("http://localhost/api-nimbus-2/lead/deleteLead", formData)
+            .then(res=>{
+                console.log(res.data);
+                if(res.data.status === "succes"){
+                    this.props.deleteLead();
+                }
+            })
+            .catch(error=>{
+                console.log(error);
+            });
+    }
+
     render(){
-        const { id_user, id_website, id_lead, name, phone, email, content, status } = this.state.lead;
+        const { name, phone, email, content, status } = this.state.lead;
         return(            
             <div className="lead-container">
                 <div className="lead-header">
@@ -47,7 +70,7 @@ class LeadComponent extends Component {
                         <button className="btn-warn">Llamar</button>
                         <button className="btn-primary">Notas</button>
                         <button className="btn-primary" onClick={this.editLead}>Editar</button>
-                        <button className="btn-primary">Eliminar</button>
+                        <button className="btn-primary" onClick={this.deleteLead}>Eliminar</button>
                     </div>
                 </div>
             </div>

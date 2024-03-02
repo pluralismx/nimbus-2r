@@ -18,48 +18,52 @@ class LeadTableComponent extends Component {
         formData.append("id_website", id_website);
         axios.post("http://localhost/api-nimbus-2/lead/getLeads", formData)
             .then(res => {
+                console.log(res.data);
                 if (res.data.status === 'succes') {
                     this.setState({
                         leads: res.data.leads
                     })
-                    console.log('leads cargados correctamente');
-
                 }
             }).catch(error => {
                 console.log(error);
             });
     }
 
-    handleEditLead = (lead) => {
-        console.log('Data received from child component:', lead);
-        this.setState({
-            editLead: lead,
-            editLeadToggle: true
-        });
-    }
-
-    handleToggleModal = () => {
-        this.setState({
-            editLeadToggle: false
-        });
-    }
-
     componentDidMount() {
         this.getLeads();
     }
+
+    handleEditLead = (lead) => {
+        this.setState({
+            editLead: lead,
+        });
+        this.handleToggleEditLead();
+    }
+
+    handleToggleEditLead = () => {
+        this.setState(prevState => ({
+          editLeadToggle: !prevState.editLeadToggle
+        }));
+      };
 
     render() {
         const { leads, editLead, editLeadToggle } = this.state;
         return (
             <div className="lead-table-container">
-                {leads.length > 0 ? (
-                    leads.map((lead, index) => (
-                        <LeadComponent key={index} lead={lead} editLead={this.handleEditLead} />
-                    ))
-                ) : (
-                    <div>There are currently no leads</div>
-                )}
-                {editLeadToggle && <LeadNotesModal data={editLead} toggleModal={this.handleToggleModal} updateLeads={this.getLeads} />}
+                <div className="leads-table-header">
+                    <h1>Prospectos</h1>
+                    <button className="btn-warn" onClick={this.newNoteToggle}>add</button>
+                </div>
+                <div className="leads-table-body">
+                    {leads.length > 0 ? (
+                        leads.map((lead, index) => (
+                            <LeadComponent key={index} lead={lead} editLead={this.handleEditLead} deleteLead={this.getLeads}/>
+                        ))
+                    ) : (
+                        <div>There are currently no leads</div>
+                    )}
+                    {editLeadToggle && <LeadNotesModal data={editLead} toggleModal={this.handleToggleEditLead} updateLeads={this.getLeads} />}
+                </div>
             </div>
         );
     }

@@ -1,4 +1,4 @@
-:root{
+:root {
   --basic: #d0efff;
   --primary: #038399;
   --accent: #feb9c5;
@@ -6,7 +6,7 @@
   --shadows: #021e20;
 }
 
-@font-face{
+@font-face {
   src: url('assets/fonts/Ubuntu-Regular.ttf');
   font-family: regular;
 }
@@ -20,7 +20,7 @@ select {
   padding: 8px;
 }
 
-input[type="text"]{
+input[type="text"] {
   border: none;
   border-bottom: 2px solid var(--primary);
   padding: 4px;
@@ -57,5 +57,3 @@ input[type="text"]{
   }
 
 }
-
-

@@ -2,14 +2,16 @@
 
 @media only screen and (max-width: 768px) {
     nav {
-        background-color: var(--primary);
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 50% 50%;
+        grid-row: 1/2;
+        grid-column: 1/2;
         padding: .5rem;
+        background-color: var(--primary);
         color: var(--basic);
-        z-index: 100;
         box-shadow: 0 2px 6px var(--shadows);
+        z-index: 100;
     }
 
     .mobile-nav-icon {
