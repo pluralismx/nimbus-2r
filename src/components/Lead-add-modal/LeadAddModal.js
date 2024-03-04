@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './LeadNotesModal.css';
+import './LeadAddModal.css';
 
-class LeadNotesModal extends Component {
+class LeadAddModal extends Component {
 
     state = {
-        lead: this.props.data
+        lead: {
+            name: null,
+            phone: null,
+            email: null,
+            status: null,
+            details: null
+        }
     }
 
     handleInputChange = (event) => {
@@ -18,18 +24,21 @@ class LeadNotesModal extends Component {
         }));
     }
 
-    editLead = () => {
-        const { id_lead, name, phone, email, status } = this.state.lead;
+    addLead = () => {
+        const { name, phone, email, status, details } = this.state.lead;
+        
         let formData = new FormData();
-        formData.append('id_lead', id_lead);
+
+        formData.append('id_website', 4);
         formData.append('name', name);
         formData.append('phone', phone);
         formData.append('email', email);
         formData.append('status', status);
+        formData.append('content', details);
 
-        axios.post("http://localhost/api-nimbus-2/lead/updateLead", formData)
+        axios.post("http://localhost/api-nimbus-2/lead/addleadManually", formData)
             .then(res => {
-                if(res.data.status === 'succes'){
+                if(res.data.status === 'success'){
                     this.props.updateLeads();
                     this.props.toggleModal();
                 }
@@ -40,12 +49,12 @@ class LeadNotesModal extends Component {
     }
 
     render() {
-        const { id_lead, name, phone, email, status } = this.state.lead;
+        //const { id_lead, name, phone, email, status } = this.state.lead;
         return (
             <div className="modal-window-container">
                 <div className="modal-container">
                     <div className="modal-header">
-                        <div><span>Lead #</span><span>{id_lead}</span></div>
+                        <div>Agregar lead manualmente</div>
                         <span onClick={this.props.toggleModal}>&times;</span>
                     </div>
                     <div className="modal-body">
@@ -54,7 +63,6 @@ class LeadNotesModal extends Component {
                             <input
                                 type="text"
                                 name="name"
-                                value={name}
                                 onChange={this.handleInputChange}
                             />
                         </div>
@@ -63,7 +71,6 @@ class LeadNotesModal extends Component {
                             <input
                                 type="text"
                                 name="phone"
-                                value={phone}
                                 onChange={this.handleInputChange}
                             />
                         </div>
@@ -72,7 +79,6 @@ class LeadNotesModal extends Component {
                             <input
                                 type="text"
                                 name="email"
-                                value={email}
                                 onChange={this.handleInputChange}
                             />
                         </div>
@@ -81,14 +87,20 @@ class LeadNotesModal extends Component {
                             <input
                                 type="text"
                                 name="status"
-                                value={status}
                                 onChange={this.handleInputChange}
                             />
+                        </div>
+                        <div className='field-block'>
+                            <label>Detalles: </label>
+                            <textarea
+                                name="detalles"
+                                onChange={this.handleInputChange}
+                            ></textarea>
                         </div>
                     </div>
                     <div className="modal-footer">
                         <button className="btn-primary" onClick={this.props.toggleModal}>cancelar</button>
-                        <button className="btn-warn" onClick={this.editLead}>guardar</button>
+                        <button className="btn-warn" onClick={this.addLead}>guardar</button>
                     </div>
                 </div>
             </div>
@@ -96,4 +108,4 @@ class LeadNotesModal extends Component {
     }
 
 }
-export default LeadNotesModal;
+export default LeadAddModal;

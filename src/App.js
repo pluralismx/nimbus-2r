@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import NavigationbarComponent from './components/Navigationbar/NavigationbarComponent';
+import NavigationbarComponent from './components/Navigation-bar/NavigationbarComponent';
 import NotesComponent from './components/Notes/NotesComponent';
 import LeadTableComponent from './components/Lead-table/LeadTableComponent';
 import EmailCampaignComponent from './components/Email-campaign/EmailCampaignComponent';

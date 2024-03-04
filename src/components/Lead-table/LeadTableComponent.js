@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import LeadComponent from '../Lead/LeadComponent';
-import LeadNotesModal from '../Lead-notes-modal/LeadNotesModal';
+import LeadCardComponent from '../Lead-card/LeadCardComponent';
+import LeadEditModal from '../Lead-edit-modal/LeadEditModal';
+import LeadAddModal from '../Lead-add-modal/LeadAddModal';
 import './LeadTableComponent.css';
 
 class LeadTableComponent extends Component {
@@ -9,7 +10,8 @@ class LeadTableComponent extends Component {
     state = {
         leads: [],
         editLead: null,
-        editLeadToggle: false
+        editLeadToggle: false,
+        addLeadToggle: false
     }
 
     getLeads = () => {
@@ -42,28 +44,50 @@ class LeadTableComponent extends Component {
 
     handleToggleEditLead = () => {
         this.setState(prevState => ({
-          editLeadToggle: !prevState.editLeadToggle
+            editLeadToggle: !prevState.editLeadToggle
         }));
-      };
+    }
+
+    addLeadToggle = () => {
+        this.setState(prevState => ({
+            addLeadToggle: !prevState.addLeadToggle
+        }));
+    }
 
     render() {
-        const { leads, editLead, editLeadToggle } = this.state;
+        const { leads, editLead, editLeadToggle, addLeadToggle } = this.state;
         return (
             <div className="lead-table-container">
                 <div className="leads-table-header">
                     <h1>Prospectos</h1>
-                    <button className="btn-warn" onClick={this.newNoteToggle}>add</button>
+                    <button className="btn-warn" onClick={this.addLeadToggle}>add</button>
+                    <button className="btn-primary">A-Z</button>
+                    <button className="btn-primary">Z-A</button>
+                    <input type="text" placeholder='search by, email, name, number, etc...'/>
+                    <button className="btn-primary">search</button>
+                    <label>Results per page:</label>
+                    <select>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <button className='btn-primary'>&lt;</button>
+                    <button className='btn-primary'>&gt;</button>
                 </div>
                 <div className="leads-table-body">
                     {leads.length > 0 ? (
                         leads.map((lead, index) => (
-                            <LeadComponent key={index} lead={lead} editLead={this.handleEditLead} deleteLead={this.getLeads}/>
+                            <LeadCardComponent key={index} lead={lead} editLead={this.handleEditLead} deleteLead={this.getLeads} updateLead={this.getLeads}/>
                         ))
                     ) : (
                         <div>There are currently no leads</div>
                     )}
-                    {editLeadToggle && <LeadNotesModal data={editLead} toggleModal={this.handleToggleEditLead} updateLeads={this.getLeads} />}
                 </div>
+                {editLeadToggle && <LeadEditModal data={editLead} toggleModal={this.handleToggleEditLead} updateLeads={this.getLeads} />}
+                {addLeadToggle && <LeadAddModal toggleModal={this.addLeadToggle} updateLeads={this.getLeads}/>}
             </div>
         );
     }
